@@ -25,7 +25,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       DB_HOST: db
-      PORT: ${PORT_DB}
+      PORT: ${PORT}
     depends_on:
       - db
     ports:
