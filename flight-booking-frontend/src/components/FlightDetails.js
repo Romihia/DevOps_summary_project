@@ -11,7 +11,19 @@ const FlightDetails = ({ flight, onBook }) => {
             <p><strong>Departure:</strong> {new Date(flight.departureTime).toLocaleString()}</p>
             <p><strong>Arrival:</strong> {new Date(flight.arrivalTime).toLocaleString()}</p>
             <p><strong>Price:</strong> ${flight.price}</p>
-            <button onClick={() => onBook(flight)}>Book This Flight</button>
+            <button
+                onClick={() => onBook(flight)}
+                style={{
+                    padding: '10px',
+                    backgroundColor: '#007bff',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                }}
+            >
+                Book This Flight
+            </button>
         </div>
     );
 };

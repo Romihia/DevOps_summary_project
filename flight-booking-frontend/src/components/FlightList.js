@@ -9,7 +9,17 @@ const FlightList = ({ flights, onSelectFlight }) => {
             ) : (
                 <ul>
                     {flights.map((flight) => (
-                        <li key={flight.id} onClick={() => onSelectFlight(flight)}>
+                        <li
+                            key={flight.id}
+                            onClick={() => onSelectFlight(flight)}
+                            style={{
+                                cursor: 'pointer',
+                                marginBottom: '10px',
+                                padding: '10px',
+                                border: '1px solid #ccc',
+                                borderRadius: '5px',
+                            }}
+                        >
                             <strong>{flight.origin}</strong> → <strong>{flight.destination}</strong> | 
                             Departure: {new Date(flight.departureTime).toLocaleString()} | 
                             Price: ${flight.price}

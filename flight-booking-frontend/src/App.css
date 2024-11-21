@@ -44,6 +44,25 @@ li {
 li:hover {
   background-color: #f0f0f0;
 }
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+button.inactive {
+  background-color: #ccc;
+  color: #000;
+}
+
 
 @keyframes App-logo-spin {
   from {

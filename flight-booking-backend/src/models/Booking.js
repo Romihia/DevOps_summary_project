@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
+const Flight = require('./Flight'); // Ensure this import is correct
 
 const Booking = sequelize.define('Booking', {
     id: {
@@ -11,5 +12,8 @@ const Booking = sequelize.define('Booking', {
     userId: { type: DataTypes.UUID, allowNull: false },
     status: { type: DataTypes.STRING, defaultValue: 'booked' },
 });
+
+// Associate Booking with Flight
+Booking.belongsTo(Flight, { foreignKey: 'flightId', as: 'flight' });
 
 module.exports = Booking;

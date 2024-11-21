@@ -1,6 +1,9 @@
 const express = require('express');
-const { bookFlight ,unBookFlight} = require('../controllers/bookingController');
+const { getBookedFlights, bookFlight, unBookFlight } = require('../controllers/bookingController');
 const router = express.Router();
+
+// Fetch all booked flights
+router.get('/', getBookedFlights);
 
 // Create a new booking
 router.post('/', bookFlight);
