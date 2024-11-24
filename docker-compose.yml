@@ -9,14 +9,12 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
   backend:
     build:
-      context: .
+      context: ./flight-booking-backend
       dockerfile: Dockerfile
     container_name: flight_booking_backend
     restart: always
@@ -30,8 +28,17 @@ services:
       - db
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
+
+  frontend:
+    build:
+      context: ./flight-booking-frontend
+      dockerfile: Dockerfile
+    container_name: flight_booking_frontend
+    restart: always
+    ports:
+      - "3001:3000"  
+    environment:
+      REACT_APP_BASE_URL: ${REACT_APP_BASE_URL}
 
 volumes:
   postgres_data:
