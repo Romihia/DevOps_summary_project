@@ -1,0 +1,15 @@
+#Create an .env file and fill it with your personal details
+
+
+# Database configuration 
+POSTGRES_DB=flight_booking
+POSTGRES_USER=your_username
+POSTGRES_PASSWORD=your_password
+DB_HOST=localhost
+PORT_DB= 5432
+
+# Backend port configuration
+PORT=3000
+
+# Frontend React configuration
+REACT_APP_BASE_URL=http://localhost:3000/api
