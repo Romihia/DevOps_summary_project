@@ -28,21 +28,31 @@ jobs:
         with:
           node-version: 18
 
-      # Step 3: Install Backend Dependencies and Run Tests
+      # Step 3: Set Environment Variables from Secrets
+      - name: Set environment variables
+        run: |
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> $GITHUB_ENV
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "PORT=${{ secrets.PORT }}" >> $GITHUB_ENV
+          echo "REACT_APP_BASE_URL=${{ secrets.REACT_APP_BASE_URL }}" >> $GITHUB_ENV
+
+      # Step 4: Install Backend Dependencies and Run Tests
       - name: Install Backend Dependencies
         working-directory: ./flight-booking-backend
         run: |
           npm install
         #   npm test
 
-      # Step 4: Set up Node.js for Frontend
+      # Step 5: Install Frontend Dependencies
       - name: Install Frontend Dependencies
         working-directory: ./flight-booking-frontend
         run: |
           npm install
         #   npm test
 
-      # Step 5: Build and Test Docker Compose
+      # Step 6: Build and Test Docker Compose
       - name: Test Docker Compose Build
         run: |
           docker compose -f docker-compose.yml --profile dev up --build --detach
