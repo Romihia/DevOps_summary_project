@@ -56,7 +56,7 @@ jobs:
 
       - name: Run Frontend Tests
         working-directory: ./flight-booking-frontend
-        run: npm test -- --watchAll=false
+        run: npm test -- --watchAll=false | npx cypress run
 
       # Step 6: Build and Test Docker Compose
       - name: Test Docker Compose Build
