@@ -54,13 +54,25 @@ jobs:
         run: |
           npm install
 
-      - name: Run Frontend Tests
-        working-directory: ./flight-booking-frontend
-        run: npm test -- --watchAll=false | npx cypress run
-
-      # Step 6: Build and Test Docker Compose
-      - name: Test Docker Compose Build
+      # Step 6: Start Docker Compose
+      - name: Start Docker Compose
         run: |
           docker compose -f docker-compose.yml --profile dev up --build --detach
           docker ps
-          docker compose down
+
+      # Step 7: Wait for the server to be ready
+      - name: Wait for server to start
+        run: |
+          while ! curl --silent --head --fail http://localhost:3001; do
+            echo "Waiting for server to start..."
+            sleep 5
+          done
+
+      # Step 8: Run Frontend Tests (Cypress)
+      - name: Run Frontend Tests
+        working-directory: ./flight-booking-frontend
+        run: npx cypress run
+
+      # Step 9: Shut down Docker Compose after tests
+      - name: Shutdown Docker Compose
+        run: docker compose down
