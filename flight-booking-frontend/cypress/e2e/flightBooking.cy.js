@@ -3,7 +3,7 @@
 describe('Flight Booking Application', () => {
   // לפני כל בדיקה, נוודא שהדף נטען כראוי
   before(() => {
-    cy.visit('http://localhost:3000');  // כתובת ה-URL של האפליקציה שלך
+    cy.visit('http://localhost:3001');  // כתובת ה-URL של האפליקציה שלך
   });
 
   // טסט 1: ווידוא שהדף הראשי נטען והכותרת נכונה
