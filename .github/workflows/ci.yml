@@ -43,14 +43,20 @@ jobs:
         working-directory: ./flight-booking-backend
         run: |
           npm install
-        #   npm test
+
+      - name: Run Backend Tests
+        working-directory: ./flight-booking-backend
+        run: npm test
 
       # Step 5: Install Frontend Dependencies
       - name: Install Frontend Dependencies
         working-directory: ./flight-booking-frontend
         run: |
           npm install
-        #   npm test
+
+      - name: Run Frontend Tests
+        working-directory: ./flight-booking-frontend
+        run: npm test -- --watchAll=false
 
       # Step 6: Build and Test Docker Compose
       - name: Test Docker Compose Build
