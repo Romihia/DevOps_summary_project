@@ -11,6 +11,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+    profiles:
+      - dev
+      - staging
+      - production
+
 
   backend:
     build:
@@ -28,6 +33,11 @@ services:
       - db
     ports:
       - "3000:3000"
+    profiles:
+      - dev
+      - staging
+      - production
+
 
   frontend:
     build:
@@ -39,6 +49,10 @@ services:
       - "3001:3000"  
     environment:
       REACT_APP_BASE_URL: ${REACT_APP_BASE_URL}
+    profiles:
+      - dev
+      - staging
+      - production
 
 volumes:
   postgres_data:
