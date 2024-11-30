@@ -1,0 +1,56 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+      - stage
+  pull_request:
+    branches:
+      - dev
+      - main
+      - stage
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_DB: flight_booking
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        ports:
+          - 5432:5432
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Install and test backend (unit tests)
+      - name: Install backend dependencies
+        working-directory: ./flight-booking-backend
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+          pytest
+
+      # Install and test frontend (unit tests)
+      - name: Install frontend dependencies
+        working-directory: ./flight-booking-frontend
+        run: |
+          npm install
+          npm test -- --watchAll=false
+
+      # Build and Test Docker Compose (integration tests)
+      - name: Build and Test Docker Compose
+        run: |
+          docker compose --env-file .env.development up --build -d
+          sleep 15 # Allow services to start
+          # Optionally: Run end-to-end tests here
+          docker compose down
