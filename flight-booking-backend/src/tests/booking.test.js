@@ -1,6 +1,6 @@
 const request = require('supertest');
-const app = require('../src/app');
-const { sequelize } = require('../src/config/database');
+const app = require('../app');
+const { sequelize } = require('../config/database');
 
 beforeAll(async () => {
     await sequelize.sync({ force: true }); // Reset database for tests
